@@ -11,17 +11,9 @@ import {
 import pubsub from "../pubnub";
 
 export default {
-  User: {
-    // firstName(user, _, __) {
-    //   return `Mr. ${user.firstName}`;
-    // },
-    fullName(user, args, ctx) {
-      return `${user.firstName} ${user.lastName}`;
-    }
-  },
   CartItem: {
-    product(parent, args, ctx) {
-      return getProduct(parent.productId);
+    product(cart, args, ctx) {
+      return getProduct(cart.productId);
     }
   },
   Query: {
@@ -29,18 +21,27 @@ export default {
       return getUser();
     },
     products(_, args, ctx) {
-      return getProducts(args.searchString);
+      return getProducts();
     },
     product(_, args, ctx) {
       return getProduct(args.id);
+    },
+    cartItem(_, args, ctx) {
+      return getCartItem(args.id);
     },
     cartItems(_, args, ctx) {
       return getCartItems();
     }
   },
   Mutation: {
+    addProduct(_, args, ctx) {
+      return addProduct(args);
+    },
     addToCart(_, args, ctx) {
-      return addToCart(args.productId);
+      return addToCart(args);
+    },
+    deleteCartItem(_, args, ctx) {
+      return deleteCartItem(args);
     }
   },
   Subscription: {

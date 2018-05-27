@@ -3,7 +3,6 @@ export default `
     id: Int!
     firstName: String
     lastName: String
-    fullName: String
   }
 
   type Product {
@@ -15,29 +14,31 @@ export default `
   }
 
   type CartItem {
-    id: String
+    id: Int!
     product: Product
-    quantity: Int
   }
 
   type Query {
     user: User
-    products(searchString: String): [Product]
-    product(id: Int!): Product
+    product(id: Int): Product
+    products: [Product]
+    cartItem(id: Int): CartItem
     cartItems: [CartItem]
   }
 
   type Mutation {
-    addToCart(productId: Int): CartItem
+    deleteCartItem(id: Int): Int
+    addProduct(id: Int, name: String, price: Int): Product
+    addToCart(productId: Int): CartItem,
   }
 
   type Subscription {
     onNewCartItem: CartItem
   }
-
   schema {
     query: Query
     mutation: Mutation
     subscription: Subscription
   }
+
 `;

@@ -26,7 +26,7 @@ app.use(
 );
 
 app.use(function(req, res, next) {
-  setTimeout(next, 2000);
+  setTimeout(next, 500);
 });
 
 app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
