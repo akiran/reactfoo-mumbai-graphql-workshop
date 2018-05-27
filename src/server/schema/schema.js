@@ -27,7 +27,12 @@ export default `
     cartItems: [CartItem]
   }
 
+  type Mutation {
+    addToCart(productId: Int): CartItem
+  }
+
   schema {
     query: Query
+    mutation: Mutation
   }
 `;

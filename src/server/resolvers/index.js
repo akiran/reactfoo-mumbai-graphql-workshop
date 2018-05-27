@@ -37,5 +37,10 @@ export default {
     cartItems(_, args, ctx) {
       return getCartItems();
     }
+  },
+  Mutation: {
+    addToCart(_, args, ctx) {
+      return addToCart(args.productId);
+    }
   }
 };

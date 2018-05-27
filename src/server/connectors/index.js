@@ -41,3 +41,12 @@ export function getProduct(id) {
 export function getCartItems() {
   return cartItems;
 }
+
+export function addToCart(productId) {
+  const newCartItem = {
+    id: cartItems.length + 1,
+    productId
+  };
+  cartItems.push(newCartItem);
+  return newCartItem;
+}
