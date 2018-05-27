@@ -14,10 +14,17 @@ export default `
     url: String
   }
 
+  type CartItem {
+    id: String
+    product: Product
+    quantity: Int
+  }
+
   type Query {
     user: User
-    products: [Product]
+    products(searchString: String): [Product]
     product(id: Int!): Product
+    cartItems: [CartItem]
   }
 
   schema {

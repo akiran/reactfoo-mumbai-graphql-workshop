@@ -19,15 +19,23 @@ export default {
       return `${user.firstName} ${user.lastName}`;
     }
   },
+  CartItem: {
+    product(parent, args, ctx) {
+      return getProduct(parent.productId);
+    }
+  },
   Query: {
     user(_, args, ctx) {
       return getUser();
     },
     products(_, args, ctx) {
-      return getProducts();
+      return getProducts(args.searchString);
     },
     product(_, args, ctx) {
       return getProduct(args.id);
+    },
+    cartItems(_, args, ctx) {
+      return getCartItems();
     }
   }
 };
