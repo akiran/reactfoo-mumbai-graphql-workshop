@@ -31,8 +31,13 @@ export default `
     addToCart(productId: Int): CartItem
   }
 
+  type Subscription {
+    onNewCartItem: CartItem
+  }
+
   schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
   }
 `;

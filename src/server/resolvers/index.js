@@ -42,5 +42,14 @@ export default {
     addToCart(_, args, ctx) {
       return addToCart(args.productId);
     }
+  },
+  Subscription: {
+    onNewCartItem: {
+      resolve(payload) {
+        console.log("Subscription", payload);
+        return payload;
+      },
+      subscribe: () => pubsub.asyncIterator("ON_NEW_CART_ITEM")
+    }
   }
 };

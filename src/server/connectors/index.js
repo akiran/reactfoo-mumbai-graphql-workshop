@@ -48,5 +48,7 @@ export function addToCart(productId) {
     productId
   };
   cartItems.push(newCartItem);
+  console.log("addToCart");
+  pubsub.publish("ON_NEW_CART_ITEM", newCartItem);
   return newCartItem;
 }
