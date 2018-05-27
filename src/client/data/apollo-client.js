@@ -1,6 +1,6 @@
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-// import { HttpLink } from "apollo-link-http";
+import { HttpLink } from "apollo-link-http";
 import { ApolloLink } from "apollo-link";
 import localStateResolvers from "./local-state/resolvers";
 import localStateDefaults from "./local-state/defaults";
@@ -23,9 +23,21 @@ const stateLink = withClientState({
   defaults: localStateDefaults
 });
 
+function logLink(operation, forward) {
+  console.log("log query", operation.query);
+  const obs = forward(operation);
+  // if (isSubscriptionQuery({ query: operation.query })) {
+  //   return obs;
+  // }
+  return obs.map(data => {
+    console.log("log data", data);
+    return data;
+  });
+}
+
 const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([stateLink, wsLink])
+  link: new HttpLink()
 });
 
 export default client;
